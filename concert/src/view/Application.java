@@ -149,7 +149,7 @@ public class Application {
 					case 3:
 						System.out.println("++++++++++++++++++예매취소++++++++++++++++");
 						System.out.println(name);
-						boolean result = cancel();
+						boolean result = cancel(name);
 						if(result) {
 						    	System.out.println("취소성공~!");
 						}else {
@@ -204,16 +204,14 @@ public class Application {
 			    
 			}
 			
-			public static boolean cancel() {
+			public static boolean cancel(String name) {
 			    for (seat temp: seatlist) {
 				System.out.println(temp.getName());
-				if(temp.getName().equals("오동진")) {
-				    System.out.println("1111111");
+				if(temp.getName().equals(name)) {
 				    temp.setName("name");
 				    return true;
 				}else {
-				    System.out.println("222222222");
-				    return false;
+				    
 				}
 				
 			    }return false;
