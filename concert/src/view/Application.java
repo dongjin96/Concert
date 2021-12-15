@@ -1,30 +1,56 @@
 package view;
 
 import java.lang.reflect.Member;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.Concert;
 import controller.Membercontroller;
 import model.Member2;
+import model.seat;
 
 public class Application {
 
 	public static Scanner scanner = new Scanner(System.in);
+	public static  String name; 
+	
+	 public static ArrayList<seat> seatlist = new ArrayList<>();
 	public static void main(String[] args) {
+	    for (int i = 0; i < 30; i++) {
+		if(i<10) {
+		    
+		 seatlist.add(new seat("s_seat","name",i+1)); //객체한번에넣기  
+		}
+		else if(i<20) {
+		    seatlist.add(new seat("s_seat","name",i+1)); //객체한번에넣기  
+		    
+		}else if(i<30) {
+		    seatlist.add(new seat("s_seat","name",i+1)); //객체한번에넣기  
+		}
+	    }
+	
+	
 		mainmenu();
 	}
 	
 	
+	
+	
 	private static void mainmenu() {
 		while(true) {
+		   
+		
+		    
+		    	
+		    
 			System.out.println("===============회원 커뮤니티===============");
 			System.out.println("1.로그인|2.회원가입|3.아이디찾기|4.비밀번호찾기| :");
 			System.out.println("=======================================");
 			int ch = scanner.nextInt();
 			if(ch==1) {
 				System.out.println("==============로그인=================");
-				System.out.println("id찾기:"); String id = scanner.next();
-				System.out.println("pw찾기:"); String pw = scanner.next();
+				System.out.println("id입력:"); String id = scanner.next();
+				System.out.println("pw입력:"); String pw = scanner.next();
 				boolean result= Membercontroller.login(id, pw);
 				if(result) {
 					System.out.println("[알림]로그인성공");
@@ -34,7 +60,7 @@ public class Application {
 					adminmenu(id);
 				}else {
 					System.out.println("[알림]로그인실패");
-				}
+				}break;
 			}
 			if(ch==2) {
 				System.out.println("==============회원가입================");
@@ -84,26 +110,55 @@ public class Application {
 		
 	}
 
-
+			
 			public static void membermenu(String id) {
-				
+			    name=findname(id);
 				while(true) {
+				    	
+					
 					System.out.println("++++++++++++++++++회원메뉴++++++++++++++++");
-					System.out.println("1.예매2.조회 3.취소4.로그아웃>>:");
+					System.out.println("1.조회 2.예매 3.취소4.로그아웃>>:");
 					int ch = scanner.nextInt();
 					switch(ch) {
 					case 1:
-						System.out.println("++++++++++++++++++예매menu++++++++++++++++");
-						
-						System.out.println("+++++++++++++++++++++++++++++++++++++++");	
-						
-					case 2:
-						System.out.println("++++++++++++++++++예매확인++++++++++++++++");
+					    	
+						System.out.println("++++++++++++++++++예매조회++++++++++++++++");
+						seatview();
 						System.out.println("+++++++++++++++++++++++++++++++++++++++");
 						
+						break;
+					case 2:
+						System.out.println("++++++++++++++++++예매++++++++++++++++");
+						System.out.println("이름 :");
+					    	String name1 = scanner.next();
+					    	System.out.println("좌석을 선택해주세요:");
+					    	int num = scanner.nextInt();
+					    	for (seat temp : seatlist) {
+					    	    if(temp.getName().equals("name")&&temp.getNum()==num) {
+					    		temp.setName(name);
+					    		System.out.println("예약이 완료되었습니다");
+					    		System.out.println(temp.getName());
+					    	    }
+							
+						    
+						    
+						}
+
+						System.out.println("+++++++++++++++++++++++++++++++++++++++");
+						break;
 					case 3:
 						System.out.println("++++++++++++++++++예매취소++++++++++++++++");
+						System.out.println(name);
+						boolean result = cancel();
+						if(result) {
+						    	System.out.println("취소성공~!");
+						}else {
+						    System.out.println("취소실패~!");
+						}
+						    
+						
 						System.out.println("+++++++++++++++++++++++++++++++++++++++");
+						break;
 					case 4:
 						System.out.println("로그아웃 되었습니다");
 						return;
@@ -111,4 +166,76 @@ public class Application {
 				}
 				
 			}
+			public static void seatview() {
+			    for(int i=0; i<30; i++) {
+				if(i%10==0) {
+				    System.out.println();
+				}
+				if (i==0) {
+				    System.out.print("S ");
+				    
+				}
+				if (i==10) {
+				    System.out.print("A ");
+				    
+				}
+				if (i==20) {
+				    System.out.print("C ");
+				    
+				}
+				
+				
+				if(seatlist.get(i).getName().equals("name")) { 
+				    System.out.print("--- ");
+				}else {
+				    System.out.print(seatlist.get(i).getName()); 
+				}
+				
+			    }
+			 System.out.println();   
+			}
+			
+			public static String findname(String abc) {
+			    for(Member2 temp:Membercontroller.memberlist) {
+				if(temp.getId().equals(abc)) {
+				    return temp.getName();
+				}
+			    }return null;
+			    
+			}
+			
+			public static boolean cancel() {
+			    for (seat temp: seatlist) {
+				System.out.println(temp.getName());
+				if(temp.getName().equals("오동진")) {
+				    System.out.println("1111111");
+				    temp.setName("name");
+				    return true;
+				}else {
+				    System.out.println("222222222");
+				    return false;
+				}
+				
+			    }return false;
+			}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
