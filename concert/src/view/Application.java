@@ -4,7 +4,7 @@ import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import controller.Concert;
+import controller.Bookcontroller;
 import controller.Membercontroller;
 import model.Member2;
 import model.seat;
@@ -123,15 +123,16 @@ public class Application {
 					case 1:
 					    	
 						System.out.println("++++++++++++++++++예매조회++++++++++++++++");
-						seatview();
+						Bookcontroller.seatview();
 						System.out.println("+++++++++++++++++++++++++++++++++++++++");
 						
 						break;
 					case 2:
 						System.out.println("++++++++++++++++++예매++++++++++++++++");
-						System.out.println("이름 :");
-					    	String name1 = scanner.next();
+						
+							System.out.println("이름 :");
 					    	System.out.println("좌석을 선택해주세요:");
+					    	String name1 = scanner.next();
 					    	int num = scanner.nextInt();
 					    	for (seat temp : seatlist) {
 					    	    if(temp.getName().equals("name")&&temp.getNum()==num) {
@@ -139,8 +140,6 @@ public class Application {
 					    		System.out.println("예약이 완료되었습니다");
 					    		System.out.println(temp.getName());
 					    	    }
-							
-						    
 						    
 						}
 
@@ -149,7 +148,7 @@ public class Application {
 					case 3:
 						System.out.println("++++++++++++++++++예매취소++++++++++++++++");
 						System.out.println(name);
-						boolean result = cancel(name);
+						boolean result =Bookcontroller.cancel(name);
 						if(result) {
 						    	System.out.println("취소성공~!");
 						}else {
@@ -166,34 +165,7 @@ public class Application {
 				}
 				
 			}
-			public static void seatview() {
-			    for(int i=0; i<30; i++) {
-				if(i%10==0) {
-				    System.out.println();
-				}
-				if (i==0) {
-				    System.out.print("S ");
-				    
-				}
-				if (i==10) {
-				    System.out.print("A ");
-				    
-				}
-				if (i==20) {
-				    System.out.print("C ");
-				    
-				}
-				
-				
-				if(seatlist.get(i).getName().equals("name")) { 
-				    System.out.print("--- ");
-				}else {
-				    System.out.print(seatlist.get(i).getName()); 
-				}
-				
-			    }
-			 System.out.println();   
-			}
+//			
 			
 			public static String findname(String abc) {
 			    for(Member2 temp:Membercontroller.memberlist) {
@@ -203,19 +175,19 @@ public class Application {
 			    }return null;
 			    
 			}
-			
-			public static boolean cancel(String name) {
-			    for (seat temp: seatlist) {
-				System.out.println(temp.getName());
-				if(temp.getName().equals(name)) {
-				    temp.setName("name");
-				    return true;
-				}else {
-				    
-				}
-				
-			    }return false;
-			}
+//			
+//			public static boolean cancel(String name) {
+//			    for (seat temp: seatlist) {
+//				System.out.println(temp.getName());
+//				if(temp.getName().equals(name)) {
+//				    temp.setName("name");
+//				    return true;
+//				}else {
+//				    
+//				}
+//				
+//			    }return false;
+//			}
 
 }
 

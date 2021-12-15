@@ -24,7 +24,17 @@ public class seat {
     
     
     
-    public String getS_seat() {
+    public seat(String name, int num) {
+		super();
+		this.name = name;
+		this.num = num;
+	}
+
+
+
+
+
+	public String getS_seat() {
         return s_seat;
     }
 
