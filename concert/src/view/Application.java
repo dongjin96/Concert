@@ -1,6 +1,7 @@
 package view;
 
-import java.lang.reflect.Member;
+import File.File;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,22 +15,13 @@ public class Application {
 	public static Scanner scanner = new Scanner(System.in);
 	public static  String name; 
 	
-	 public static ArrayList<seat> seatlist = new ArrayList<>();
+	 public static ArrayList<seat> seatlist = Bookcontroller.room();
+	 public static ArrayList<seat> seatlist2 = Bookcontroller.room();
 	public static void main(String[] args) {
-	    for (int i = 0; i < 30; i++) {
-		if(i<10) {
-		    
-		 seatlist.add(new seat("s_seat","name",i+1)); //객체한번에넣기  
-		}
-		else if(i<20) {
-		    seatlist.add(new seat("s_seat","name",i+1)); //객체한번에넣기  
-		    
-		}else if(i<30) {
-		    seatlist.add(new seat("s_seat","name",i+1)); //객체한번에넣기  
-		}
-	    }
 	
 	
+		File.fileload(1);	// 회원 파일 불러오기
+		File.fileload(2);
 		mainmenu();
 	}
 	
@@ -57,7 +49,7 @@ public class Application {
 					membermenu(id);
 				}else if(result) {
 					System.out.println("[알림]관리자 로그인성공");
-					adminmenu(id);
+				
 				}else {
 					System.out.println("[알림]로그인실패");
 				}break;
@@ -101,14 +93,7 @@ public class Application {
 			}
 		}
 	}//main end
-			private static void adminmenu(String id) {
-				while(true) {
-					System.out.println("+++++++++++++++++관리자메뉴++++++++++++++++");
-					System.out.println("1.영화등록 2. 영화등록취소 3.로그아웃");
-				}
 		
-		
-	}
 
 			
 			public static void membermenu(String id) {
@@ -123,37 +108,45 @@ public class Application {
 					case 1:
 					    	
 						System.out.println("++++++++++++++++++예매조회++++++++++++++++");
-						Bookcontroller.seatview();
+						System.out.println("1.관|2.관 :"); ch = scanner.nextInt();
+						if (ch==1) {
+							Bookcontroller.seatview(seatlist);
+						}else {
+							Bookcontroller.seatview(seatlist2);
+						}
+						
 						System.out.println("+++++++++++++++++++++++++++++++++++++++");
 						
 						break;
 					case 2:
 						System.out.println("++++++++++++++++++예매++++++++++++++++");
-						
-							System.out.println("이름 :");
-					    	System.out.println("좌석을 선택해주세요:");
-					    	String name1 = scanner.next();
+						System.out.println("1.관|2.관 :"); ch = scanner.nextInt();
+						if(ch==1) {
+							System.out.println("좌석을 선택해주세요:");
 					    	int num = scanner.nextInt();
-					    	for (seat temp : seatlist) {
-					    	    if(temp.getName().equals("name")&&temp.getNum()==num) {
-					    		temp.setName(name);
-					    		System.out.println("예약이 완료되었습니다");
-					    		System.out.println(temp.getName());
-					    	    }
-						    
+					    	Bookcontroller.Book(seatlist, num, name);
+						
+						}else {
+							System.out.println("좌석을 선택해주세요:");
+					    	int num = scanner.nextInt();
+					    	Bookcontroller.Book(seatlist2, num, name);
 						}
+					    	
 
 						System.out.println("+++++++++++++++++++++++++++++++++++++++");
 						break;
 					case 3:
 						System.out.println("++++++++++++++++++예매취소++++++++++++++++");
-						System.out.println(name);
-						boolean result =Bookcontroller.cancel(name);
-						if(result) {
-						    	System.out.println("취소성공~!");
+						if(Bookcontroller.bookview(seatlist,name)) {
+							Bookcontroller.cancel(seatlist, name);
+							Bookcontroller.cancel(seatlist2, name);
+							System.out.println("취소 성공");
 						}else {
-						    System.out.println("취소실패~!");
+							System.out.println("취소 실패");
 						}
+						
+						
+						
 						    
 						
 						System.out.println("+++++++++++++++++++++++++++++++++++++++");
@@ -170,7 +163,7 @@ public class Application {
 			public static String findname(String abc) {
 			    for(Member2 temp:Membercontroller.memberlist) {
 				if(temp.getId().equals(abc)) {
-				    return temp.getName();
+				   return temp.getName();
 				}
 			    }return null;
 			    

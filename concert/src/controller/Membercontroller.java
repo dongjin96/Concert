@@ -1,5 +1,6 @@
 package controller;
 
+import File.File;
 import java.util.ArrayList;
 
 
@@ -54,6 +55,7 @@ public class Membercontroller {
 			
 		}
 		memberlist.add(member2);
+		File.filesave(1);
 		return true;
 	}
 	
