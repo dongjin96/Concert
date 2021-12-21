@@ -19,7 +19,7 @@ public class File {
 	
 	// 저장 메소드 
 	public static boolean filesave( int type ) {
-							// type : 1:회원저장 2:게시물저장 3:댓글저장
+							
 		try {				
 			FileOutputStream fileOutputStream = null; //ㄴ선언만
 			if( type == 1 ) { // 회원저장 

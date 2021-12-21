@@ -72,6 +72,7 @@ public class Bookcontroller {
 		    	
 		    	    }
 				}
+				
 				File.filesave(1);
 			}
 			// 이름찾기
@@ -84,7 +85,19 @@ public class Bookcontroller {
 			    
 			}
 			// 취소 메소드
-			public static boolean cancel(ArrayList<seat> abs, String name) {
+			public static boolean cancel1(ArrayList<seat> abs, String name) {
+			    for (seat temp: abs) {
+				System.out.println(temp.getName());
+				if(temp.getName().equals(name)) {
+				    temp.setName("name");
+				    return true;
+				}else {
+				    
+				}
+				
+			    }return false;
+			}
+			public static boolean cancel2(ArrayList<seat> abs, String name) {
 			    for (seat temp: abs) {
 				System.out.println(temp.getName());
 				if(temp.getName().equals(name)) {

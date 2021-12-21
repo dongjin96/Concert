@@ -52,7 +52,7 @@ public class Application {
 				
 				}else {
 					System.out.println("[알림]로그인실패");
-				}break;
+				}return;
 			}
 			if(ch==2) {
 				System.out.println("==============회원가입================");
@@ -66,6 +66,7 @@ public class Application {
 					System.out.println("[알림]회원가입 성공");
 				}else {
 					System.out.println("[알림]회원가입 실패");
+					return;
 				}
 			}
 			if(ch==3) {
@@ -77,6 +78,7 @@ public class Application {
 					System.out.println("아이디찾기 성공");
 				}else {
 					System.out.println("아이디찾기 실패");
+					return;
 				}
 			}
 			if(ch==4) {
@@ -88,9 +90,10 @@ public class Application {
 						System.out.println("비밀번호찾기 성공");
 					}else {
 						System.out.println("비밀번호 찾기 실패");
+						return;
 					}
 				}
-			}
+			}	
 		}
 	}//main end
 		
@@ -137,10 +140,15 @@ public class Application {
 						break;
 					case 3:
 						System.out.println("++++++++++++++++++예매취소++++++++++++++++");
-						if(Bookcontroller.bookview(seatlist,name)) {
-							Bookcontroller.cancel(seatlist, name);
-							Bookcontroller.cancel(seatlist2, name);
+						System.out.println("1.관|2.관 :"); ch = scanner.nextInt();
+						if(ch==1) {
+							Bookcontroller.cancel1(seatlist, name);
+							
 							System.out.println("취소 성공");
+						}else if(ch==2) {
+							Bookcontroller.cancel2(seatlist2, name);
+						
+							
 						}else {
 							System.out.println("취소 실패");
 						}
