@@ -22,6 +22,8 @@ public class Application {
 	
 		File.fileload(1);	// 회원 파일 불러오기
 		File.fileload(2);
+		File.filesave(1);
+		File.filesave(2);
 		mainmenu();
 	}
 	
@@ -161,7 +163,7 @@ public class Application {
 						break;
 					case 4:
 						System.out.println("로그아웃 되었습니다");
-						return;
+						break;
 					}
 				}
 				

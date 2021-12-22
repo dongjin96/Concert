@@ -56,6 +56,7 @@ public class Bookcontroller {
 				    System.out.print("--- ");
 				}else {
 				    System.out.print(room.get(i).getName()); 
+				    File.fileload(2);
 				}
 				
 			    }
@@ -64,17 +65,19 @@ public class Bookcontroller {
 			}
 			//예매하기
 			public static void Book(ArrayList<seat> avx,int num, String name) {
-				for (seat temp : avx) {
+			for (seat temp : avx) {
 		    	    if(temp.getName().equals("name")&&temp.getNum()==num) {
 		    		temp.setName(name);
 		    		System.out.println("예약이 완료되었습니다");
 		    		System.out.println(temp.getName());
-		    	
+		    		File.filesave(2);
 		    	    }
-				}
-				
-				File.filesave(1);
 			}
+				
+				
+			}
+				
+				
 			// 이름찾기
 			public static String findname(String abc) {
 			    for(Member2 temp:Membercontroller.memberlist) {
