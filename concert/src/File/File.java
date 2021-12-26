@@ -13,10 +13,11 @@ public class File {
 	// 필드
 		// 1. 회원정보를 저장하는 파일의 경로 
 	private static String memberpath = 
-			"C:/Users/505/git/Concerts/concert/src/File/memberlist.txt";
+			"C:/Users/오동진/Desktop/apache-tomcat-9.0.56-windows-x64/동진자바/Concert/concert/src/File/memberlist.txt";
 	private static String bookpath=
-			"C:/Users/505/git/Concerts/concert/src/File/booklist.txt";
-	
+			"C:/Users/오동진/Desktop/apache-tomcat-9.0.56-windows-x64/동진자바/Concert/concert/src/File/booklist.txt";
+	private static String bookpath2=
+			"C:/Users/오동진/Desktop/apache-tomcat-9.0.56-windows-x64/동진자바/Concert/concert/src/File/booklist2.txt";
 	// 저장 메소드 
 	public static boolean filesave( int type ) {
 							
@@ -29,7 +30,7 @@ public class File {
 				for( Member2 member : Membercontroller.memberlist ) {
 					// 3. 각 회원마다 필드[,]와 회원[/n] 구분
 					String outstring = member.getId()+","+member.getPassword()+","+
-										member.getName()+","+member.getPhone()+","+
+										member.getName()+","+member.getPhone()+
 										"\n";
 					// 4. 바이트로 내보내기 
 					fileOutputStream.write( outstring.getBytes() );
@@ -42,9 +43,9 @@ public class File {
 			}
 			
 			else	if( type == 2 ) {
-				fileOutputStream = new FileOutputStream(bookpath);
+				fileOutputStream = new FileOutputStream(bookpath,false);
 				for(seat seat : Application.seatlist ) {
-					String outstring = seat.getS_seat()+","+seat.getNum()+","+seat.getName();
+					String outstring = seat.getS_seat()+","+seat.getName()+","+seat.getNum()+"\n";
 				
 				fileOutputStream.write(outstring.getBytes());
 				}
@@ -52,14 +53,23 @@ public class File {
 				fileOutputStream.close(); 
 				
 				return true; 
+			}else if (type==3) {
+				fileOutputStream = new FileOutputStream(bookpath2);
+				for(seat seat : Application.seatlist ) {
+					String outstring = seat.getS_seat()+","+seat.getNum()+","+seat.getName()+"\n";
+				
+				fileOutputStream.write(outstring.getBytes());
+				}
+				fileOutputStream.flush(); 
+				fileOutputStream.close(); 
 			}
 			else {
 				System.out.println("저장 실패");
 			}
 			
 	
-		}catch (Exception e) {
-			System.out.println(" [알림] : 파일 저장 오류 발생 [ 관리자에게 문의 ]");
+		}catch (Exception e) { System.out.println("저장 하기 오류");
+			
 		}
 		return false; // 파일처리 실패
 	}
@@ -109,18 +119,20 @@ public class File {
 				fileInputStream.read(bytes);
 				String  instring = new String(bytes);
 				String[] book = instring.split("\n");
-				for (int i = 0; i <book.length; i++) {
+				for (int i = 0; i <book.length-1; i++) {
 					String[] field = book[i].split(",");
-					seat seat2 = new seat(instring, i);
+					seat seat2 = new seat(field[0], field[1],Integer.parseInt(field[2]));
 					Application.seatlist.add(seat2);
 				}
 				fileInputStream.close();
+				System.out.println("book 저장 성공");
 				return true;
 			}
-			if(type==3) {}
+		
 		}
 		catch (Exception e) {
-			System.out.println(" [알림] : 파일 불러오기 오류 발생 [ 관리자에게 문의 ]");
+			System.out.println("자리 불러오기 오류");
+			
 		}
 		return false; // 파일 블러오기 실패시
 	}

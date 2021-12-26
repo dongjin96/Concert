@@ -22,12 +22,19 @@ public class seat {
 	this.num = num;
 	
     }
+    
 
     
     
     
     
-    public seat(String name, int num) {
+   
+
+
+
+
+
+	public seat(String name, int num) {
 		super();
 		this.name = name;
 		this.num = num;

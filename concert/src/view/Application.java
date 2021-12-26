@@ -15,16 +15,15 @@ public class Application {
 	public static Scanner scanner = new Scanner(System.in);
 	public static  String name; 
 	
-	 public static ArrayList<seat> seatlist = Bookcontroller.room();
+	 public static ArrayList<seat> seatlist = new ArrayList<seat>();
 	 public static ArrayList<seat> seatlist2 = Bookcontroller.room();
 	public static void main(String[] args) {
 	
 	
 		File.fileload(1);	// 회원 파일 불러오기
 		File.fileload(2);
-		File.filesave(1);
-		File.filesave(2);
 		mainmenu();
+		
 	}
 	
 	
@@ -49,6 +48,7 @@ public class Application {
 				if(result) {
 					System.out.println("[알림]로그인성공");
 					membermenu(id);
+					continue;
 				}else if(result) {
 					System.out.println("[알림]관리자 로그인성공");
 				
@@ -105,12 +105,14 @@ public class Application {
 			    name=findname(id);
 				while(true) {
 				    	
+					try {
+						
 					
 					System.out.println("++++++++++++++++++회원메뉴++++++++++++++++");
 					System.out.println("1.조회 2.예매 3.취소4.로그아웃>>:");
 					int ch = scanner.nextInt();
-					switch(ch) {
-					case 1:
+					if(ch==1) {
+					
 					    	
 						System.out.println("++++++++++++++++++예매조회++++++++++++++++");
 						System.out.println("1.관|2.관 :"); ch = scanner.nextInt();
@@ -122,8 +124,7 @@ public class Application {
 						
 						System.out.println("+++++++++++++++++++++++++++++++++++++++");
 						
-						break;
-					case 2:
+					}else if(ch==2){
 						System.out.println("++++++++++++++++++예매++++++++++++++++");
 						System.out.println("1.관|2.관 :"); ch = scanner.nextInt();
 						if(ch==1) {
@@ -139,8 +140,8 @@ public class Application {
 					    	
 
 						System.out.println("+++++++++++++++++++++++++++++++++++++++");
-						break;
-					case 3:
+						
+					}else if(ch==3){
 						System.out.println("++++++++++++++++++예매취소++++++++++++++++");
 						System.out.println("1.관|2.관 :"); ch = scanner.nextInt();
 						if(ch==1) {
@@ -160,10 +161,13 @@ public class Application {
 						    
 						
 						System.out.println("+++++++++++++++++++++++++++++++++++++++");
-						break;
-					case 4:
+						
+					}else{
 						System.out.println("로그아웃 되었습니다");
-						break;
+						return;
+					}
+					} catch (Exception e) {
+						// TODO: handle exception
 					}
 				}
 				

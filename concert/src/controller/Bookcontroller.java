@@ -89,16 +89,37 @@ public class Bookcontroller {
 			}
 			// 취소 메소드
 			public static boolean cancel1(ArrayList<seat> abs, String name) {
-			    for (seat temp: abs) {
-				System.out.println(temp.getName());
-				if(temp.getName().equals(name)) {
-				    temp.setName("name");
-				    return true;
-				}else {
-				    
-				}
 				
-			    }return false;
+				int[] bookcancel =new int[3];
+			
+				for (seat temp: abs) {
+				if(temp.getName().equals(name))	{
+				for (int i = 1; i < bookcancel.length; i++) {
+					if(bookcancel[i]==0) {
+						bookcancel[i]=temp.getNum();
+						System.out.println(i+1+"번"+"예약 된 좌석 번호 입니다 :"+bookcancel[i]);
+						continue;
+					}	
+					}
+					System.out.println("취소 할 좌석 번호 를 입력해주세요 :"); int ch = scanner.nextInt();
+					if(ch >bookcancel.length || ch<0 ) {
+						System.out.println(" 잘못 입력했습니다");
+						return false;
+					}else {
+						
+						abs.get(bookcancel[ch]).setName("name");
+						System.out.println(ch);
+						System.out.println(bookcancel[ch]);
+						File.filesave(2);
+						return true;}
+				
+				
+					}
+				
+				
+				
+				}
+				return false; 
 			}
 			public static boolean cancel2(ArrayList<seat> abs, String name) {
 			    for (seat temp: abs) {
