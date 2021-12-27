@@ -5,74 +5,36 @@ import java.util.ArrayList;
 
 public class seat {
 
-    private String s_seat;
-    private String name;
-    private int num;
+    int seat_num ;
+    String member_id;
     
-    public seat() { }
-
+    public seat() {
+    }
     
-    
-    
-    
-    public seat(String s_seat, String name, int num) {
+    public seat(int seat_num, String member_id) {
 	super();
-	this.s_seat = s_seat;
-	this.name = name;
-	this.num = num;
-	
-    }
-    
-
-    
-    
-    
-    
-   
-
-
-
-
-
-	public seat(String name, int num) {
-		super();
-		this.name = name;
-		this.num = num;
-	}
-
-
-
-
-
-	public String getS_seat() {
-        return s_seat;
+	this.seat_num = seat_num;
+	this.member_id = member_id;
     }
 
-    public void setS_seat(String s_seat) {
-        this.s_seat = s_seat;
+    public int getSeat_num() {
+        return seat_num;
     }
-
-    public String getName() {
-        return name;
+    public void setSeat_num(int seat_num) {
+        this.seat_num = seat_num;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public String getMember_id() {
+        return member_id;
     }
-
-    public int getNum() {
-        return num;
+    public void setMember_id(String member_id) {
+        this.member_id = member_id;
     }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
-
-   
     
-    
-    
-    
+    @Override
+    public String toString() {
+       
+        return seat_num + "   " + member_id;
+    }
     
     
 }

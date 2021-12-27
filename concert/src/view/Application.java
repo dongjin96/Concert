@@ -15,8 +15,9 @@ public class Application {
 	public static Scanner scanner = new Scanner(System.in);
 	public static  String name; 
 	
-	 public static ArrayList<seat> seatlist = new ArrayList<seat>();
-	 public static ArrayList<seat> seatlist2 = Bookcontroller.room();
+	public static ArrayList<seat> seatlist1 = new ArrayList<seat>(); // 1관
+	public static ArrayList<seat> seatlist2 = new ArrayList<seat>(); // 2관 
+	 
 	public static void main(String[] args) {
 	
 	
@@ -117,9 +118,9 @@ public class Application {
 						System.out.println("++++++++++++++++++예매조회++++++++++++++++");
 						System.out.println("1.관|2.관 :"); ch = scanner.nextInt();
 						if (ch==1) {
-							Bookcontroller.seatview(seatlist);
+							Bookcontroller.seatview();
 						}else {
-							Bookcontroller.seatview(seatlist2);
+							Bookcontroller.seatview();
 						}
 						
 						System.out.println("+++++++++++++++++++++++++++++++++++++++");
@@ -130,12 +131,12 @@ public class Application {
 						if(ch==1) {
 							System.out.println("좌석을 선택해주세요:");
 					    	int num = scanner.nextInt();
-					    	Bookcontroller.Book(seatlist, num, name);
+					    	Bookcontroller.Book(num, name);
 						
 						}else {
 							System.out.println("좌석을 선택해주세요:");
 					    	int num = scanner.nextInt();
-					    	Bookcontroller.Book(seatlist2, num, name);
+					    	Bookcontroller.Book( num, name);
 						}
 					    	
 
@@ -145,11 +146,11 @@ public class Application {
 						System.out.println("++++++++++++++++++예매취소++++++++++++++++");
 						System.out.println("1.관|2.관 :"); ch = scanner.nextInt();
 						if(ch==1) {
-							Bookcontroller.cancel1(seatlist, name);
+							//Bookcontroller.cancel1(seatlist, name);
 							
 							System.out.println("취소 성공");
 						}else if(ch==2) {
-							Bookcontroller.cancel2(seatlist2, name);
+							//Bookcontroller.cancel2(seatlist2, name);
 						
 							
 						}else {

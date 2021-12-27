@@ -13,9 +13,9 @@ public class File {
 	// 필드
 		// 1. 회원정보를 저장하는 파일의 경로 
 	private static String memberpath = 
-			"C:/Users/오동진/Desktop/apache-tomcat-9.0.56-windows-x64/동진자바/Concert/concert/src/File/memberlist.txt";
+			"C:/Users/505/git/Concerts\\concert\\src\\File/memberlist.txt";
 	private static String bookpath=
-			"C:/Users/오동진/Desktop/apache-tomcat-9.0.56-windows-x64/동진자바/Concert/concert/src/File/booklist.txt";
+			"C:\\Users\\505\\git\\Concerts\\concert\\src\\File/booklist.txt";
 	private static String bookpath2=
 			"C:/Users/오동진/Desktop/apache-tomcat-9.0.56-windows-x64/동진자바/Concert/concert/src/File/booklist2.txt";
 	// 저장 메소드 
@@ -44,8 +44,8 @@ public class File {
 			
 			else	if( type == 2 ) {
 				fileOutputStream = new FileOutputStream(bookpath,false);
-				for(seat seat : Application.seatlist ) {
-					String outstring = seat.getS_seat()+","+seat.getName()+","+seat.getNum()+"\n";
+				for(seat seat : Application.seatlist1 ) {
+					String outstring = seat.getSeat_num()+","+seat.getMember_id()+"\n";
 				
 				fileOutputStream.write(outstring.getBytes());
 				}
@@ -53,16 +53,14 @@ public class File {
 				fileOutputStream.close(); 
 				
 				return true; 
-			}else if (type==3) {
-				fileOutputStream = new FileOutputStream(bookpath2);
-				for(seat seat : Application.seatlist ) {
-					String outstring = seat.getS_seat()+","+seat.getNum()+","+seat.getName()+"\n";
-				
-				fileOutputStream.write(outstring.getBytes());
-				}
-				fileOutputStream.flush(); 
-				fileOutputStream.close(); 
-			}
+			    } /*
+			       * else if (type==3) { fileOutputStream = new FileOutputStream(bookpath2);
+			       * for(seat seat : Application.seatlist ) { String outstring =
+			       * seat.getS_seat()+","+seat.getNum()+","+seat.getName()+"\n";
+			       * 
+			       * fileOutputStream.write(outstring.getBytes()); } fileOutputStream.flush();
+			       * fileOutputStream.close(); }
+			       */
 			else {
 				System.out.println("저장 실패");
 			}
@@ -121,8 +119,8 @@ public class File {
 				String[] book = instring.split("\n");
 				for (int i = 0; i <book.length-1; i++) {
 					String[] field = book[i].split(",");
-					seat seat2 = new seat(field[0], field[1],Integer.parseInt(field[2]));
-					Application.seatlist.add(seat2);
+					seat seat2 = new seat(Integer.parseInt(field[0]) ,  field[1]);
+					Application.seatlist1.add(seat2);
 				}
 				fileInputStream.close();
 				System.out.println("book 저장 성공");

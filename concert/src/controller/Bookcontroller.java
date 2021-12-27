@@ -12,69 +12,62 @@ import view.Application;
 public class Bookcontroller {
 
 	public static Scanner scanner = new Scanner(System.in);
-	
-			
-			
-			public static ArrayList<seat> room(){
-		        ArrayList<seat> room =  new ArrayList<seat>();
-		        for (int i = 0; i < 30; i++) {
-		    		if(i<10) {
-		    		    
-		    		room.add(new seat("s_seat","name",i+1)); //객체한번에넣기  
-		    		}
-		    		else if(i<20) {
-		    			room.add(new seat("s_seat","name",i+1)); //객체한번에넣기  
-		    		    
-		    		}else if(i<30) {
-		    			room.add(new seat("s_seat","name",i+1)); //객체한번에넣기  
-		    		}
-		    	    }
-		        return room;
-		    	
-		    }
+
+	/*
+	 * 
+	 * 
+	 * public static ArrayList<seat> room(){ ArrayList<seat> room = new
+	 * ArrayList<seat>(); for (int i = 0; i < 30; i++) { if(i<10) {
+	 * 
+	 * room.add(new seat("s_seat","name",i+1)); //객체한번에넣기 } else if(i<20) {
+	 * room.add(new seat("s_seat","name",i+1)); //객체한번에넣기
+	 * 
+	 * }else if(i<30) { room.add(new seat("s_seat","name",i+1)); //객체한번에넣기 } }
+	 * return room;
+	 * 
+	 * }
+	 */
 			//조회하는메소드
-			public static void seatview(ArrayList<seat> room) {
-			    for(int i=0; i<30; i++) {
-				if(i%10==0) {
-				    System.out.println();
+			public static void seatview() {
+			    int row =1;
+			    System.out.print(" S 좌석 : ");
+			    for(int i=1; i<=30; i++) {
+				 boolean seatcheck = true;
+				for( seat temp : Application.seatlist1 ) {
+				    if( temp.getSeat_num() == i ) {
+					System.out.print(" "+ temp.getMember_id() + " ");
+					seatcheck = false;
+					break;
+				    }
 				}
-				if (i==0) {
-				    System.out.print("S ");
-				    
+				if(  seatcheck ) {
+				    String strnum = String.format( "%02d", i );
+				    System.out.print(" "+ strnum + " ");
+
 				}
-				if (i==10) {
-				    System.out.print("A ");
-				    
+				if( i % 10 == 0 ) {
+				    System.out.println(); row++;
+				    if( row == 2 ) System.out.print(" A 좌석 : ");
+				    if( row == 3 ) System.out.print(" B 좌석 : ");
+				   
 				}
-				if (i==20) {
-				    System.out.print("C ");
-				    
-				}
-				
-			
-				if(room.get(i).getName().equals("name")) { 
-				    System.out.print("--- ");
-				}else {
-				    System.out.print(room.get(i).getName()); 
-				    File.fileload(2);
-				}
-				
 			    }
-			    
 			 System.out.println();   
 			}
 			//예매하기
-			public static void Book(ArrayList<seat> avx,int num, String name) {
-			for (seat temp : avx) {
-		    	    if(temp.getName().equals("name")&&temp.getNum()==num) {
-		    		temp.setName(name);
-		    		System.out.println("예약이 완료되었습니다");
-		    		System.out.println(temp.getName());
-		    		File.filesave(2);
-		    	    }
-			}
-				
-				
+			public static void Book( int num, String name) {
+			    
+			    // 중복체크 
+			    for( seat temp : Application.seatlist1 ) {
+				if( temp.getSeat_num() == num ) {
+				    System.out.println("현재 예매가 된 자리 입니다 ");
+				    return; // 예매 막기 
+				}
+			    }
+			    // 중복이 없으면 등록 
+			    seat seat = new seat( num , name ); // 예매좌석 객체 
+			    Application.seatlist1.add(seat); // 예매좌석을 1관 리스트에 넣기 
+			    File.filesave(2);
 			}
 				
 				
