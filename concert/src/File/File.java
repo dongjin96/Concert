@@ -13,9 +13,9 @@ public class File {
 	// 필드
 		// 1. 회원정보를 저장하는 파일의 경로 
 	private static String memberpath = 
-			"C:/Users/505/git/Concerts\\concert\\src\\File/memberlist.txt";
+			"C:\\Users\\오동진\\Desktop\\뜸부기\\Concert\\concert\\src\\File/memberlist.txt";
 	private static String bookpath=
-			"C:\\Users\\505\\git\\Concerts\\concert\\src\\File/booklist.txt";
+			"C:\\Users\\오동진\\Desktop\\뜸부기\\Concert\\concert\\src\\File/booklist.txt";
 	private static String bookpath2=
 			"C:/Users/오동진/Desktop/apache-tomcat-9.0.56-windows-x64/동진자바/Concert/concert/src/File/booklist2.txt";
 	// 저장 메소드 
@@ -48,6 +48,10 @@ public class File {
 					String outstring = seat.getSeat_num()+","+seat.getMember_id()+"\n";
 				
 				fileOutputStream.write(outstring.getBytes());
+				}
+				if(Application.seatlist1.get(0).getMember_id()==null) {
+					String write = "asdcasd ";
+					fileOutputStream.write(write.getBytes());
 				}
 				fileOutputStream.flush(); 
 				fileOutputStream.close(); 

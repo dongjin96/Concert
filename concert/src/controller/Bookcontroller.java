@@ -84,53 +84,86 @@ public class Bookcontroller {
 			public static boolean cancel1(ArrayList<seat> abs, String name) {
 				
 				int[] bookcancel =new int[3];
-			
-				for (seat temp: abs) {
-				if(temp.getName().equals(name))	{
-				for (int i = 1; i < bookcancel.length; i++) {
-					if(bookcancel[i]==0) {
-						bookcancel[i]=temp.getNum();
-						System.out.println(i+1+"번"+"예약 된 좌석 번호 입니다 :"+bookcancel[i]);
-						continue;
-					}	
-					}
-					System.out.println("취소 할 좌석 번호 를 입력해주세요 :"); int ch = scanner.nextInt();
-					if(ch >bookcancel.length || ch<0 ) {
-						System.out.println(" 잘못 입력했습니다");
-						return false;
-					}else {
+				System.out.println(name);
+				int count =1;
+				for(seat temp : abs) {
+					if(temp.getMember_id().equals(name)) {
+					bookcancel[count]=temp.getSeat_num();
+					System.out.println(count+"번"+"예약 된 좌석 번호 입니다 :"+bookcancel[count]);
+					count++;
 						
-						abs.get(bookcancel[ch]).setName("name");
-						System.out.println(ch);
-						System.out.println(bookcancel[ch]);
-						File.filesave(2);
-						return true;}
-				
-				
 					}
-				
-				
-				
+					
 				}
-				return false; 
-			}
-			public static boolean cancel2(ArrayList<seat> abs, String name) {
-			    for (seat temp: abs) {
-				System.out.println(temp.getName());
-				if(temp.getName().equals(name)) {
-				    temp.setName("name");
-				    return true;
+				System.out.println("취소 할 좌석 번호 를 입력해주세요 :"); int ch = scanner.nextInt();
+				if(ch >bookcancel.length || ch<0 ) {
+					System.out.println(" 잘못 입력했습니다");
+					return false;
 				}else {
-				    
-				}
 				
-			    }return false;
+					System.out.println("하고난거"+abs.get(0).getSeat_num());
+					if(Application.seatlist1.isEmpty()) {
+						System.out.println("성공121212121212");
+					}else if(abs.get(ch).getMember_id()==null){
+						System.out.println("getMember_id실패");
+					}
+					for(seat temp : abs) {
+						System.out.println("나s"+temp.getSeat_num());
+					}
+					abs.remove(ch-1);
+					System.out.println("하고난거"+abs.get(0).getSeat_num());
+					if(Application.seatlist1.isEmpty()) {
+						System.out.println("성공");
+					}else if(abs.get(ch).getMember_id()==null){
+						System.out.println("getMember_id실패");
+					}
+					for(seat temp : abs) {
+						System.out.println("나중에"+temp.getSeat_num());
+					}
+					
+					File.filesave(2);
+					return true;}
+				
+				
+				//int[] bookcancel =new int[3];
+		
+				/*
+				 * for (seat temp: abs) { if(temp.getMember_id().equals(name)) { for (int i = 1;
+				 * i < bookcancel.length; i++) { if(bookcancel[i]==0) {
+				 * bookcancel[i]=temp.getSeat_num();
+				 * System.out.println(i+1+"번"+"예약 된 좌석 번호 입니다 :"+bookcancel[i]); continue; } }
+				 * 
+				 * System.out.println("취소 할 좌석 번호 를 입력해주세요 :"); int ch1 = scanner.nextInt();
+				 * if(ch >bookcancel.length || ch<0 ) { System.out.println(" 잘못 입력했습니다"); return
+				 * false; }else {
+				 * 
+				 * abs.get(bookcancel[ch]).setSeat_num(ch); System.out.println(ch);
+				 * System.out.println(bookcancel[ch]); File.filesave(2); return true;}
+				 * 
+				 * 
+				 * }
+				 * 
+				 * 
+				 * 
+				 * }
+				 */
+				
 			}
+
+			/*
+			 * public static boolean cancel2(ArrayList<seat> abs, String name) { for (seat
+			 * temp: abs) { System.out.println(temp.get()); if(temp.getName().equals(name))
+			 * { temp.setName("name"); return true; }else {
+			 * 
+			 * }
+			 * 
+			 * }return false; }
+			 */
 			//조회하는 메소드
 			public static boolean bookview(ArrayList<seat> asv, String name) {
 				for(seat temp : asv) {
-					if(temp.getName().equals(name)) {
-						System.out.println("회원님의 좌석은 :"+temp.getNum()+"입니다");
+					if(temp.getMember_id().equals(name)) {
+						System.out.println("회원님의 좌석은 :"+temp.getSeat_num()+"입니다");
 						return true;
 					}else {
 						System.out.println("예약한 좌석이 없습니다");

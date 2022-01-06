@@ -147,8 +147,8 @@ public class Application {
 						System.out.println("1.包|2.包 :"); ch = scanner.nextInt();
 						if(ch==1) {
 							//Bookcontroller.cancel1(seatlist, name);
+							Bookcontroller.cancel1(seatlist1, name);
 							
-							System.out.println("秒家 己傍");
 						}else if(ch==2) {
 							//Bookcontroller.cancel2(seatlist2, name);
 						
